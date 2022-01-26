@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Converter</title>
+    <meta charset = 'utf-8'>
+    <link rel="stylesheet" href ="Style.css">
+</head>
+<body>
+    <div style="min-width:800px" >
+        <h1>Image to List Converter</h1>
+    </div>
+    <div style ="width:800px; margin:0 auto">
+            <img id = "img100" src="Select.png" alt="Sorry" width="800px" height="600px" style = "border:3px solid; display:inline-block;image-rendering: pixelated;">
+    </div>
+    <div style ="width:800px; margin:0 auto">
+        <form>
+            <label for ="inp100">Select file</label> <img id = "ld100" src = "Loading.gif" width = "50" height = "10" hidden>
+            <input type ="file" id = "inp100" name = "fileinput" accept = "image/*" oninput = "changeimg()" hidden> 
+        </form>
+    </div>
+    </div>
+    <div style = "width:800px; margin:5px auto;">
+        <div id = "opt100" style = "width:800px; height:300px; border:3px solid; border-radius:8px; overflow:visible scroll">
+        </div>
+    </div>
+    <div style = "width:800px; margin:0 auto;">
+        <a id = "dwl100" href = "data:text/plain;charset='utf-8',Hello,%20world!" download="Level Data.txt" hidden>Click to Download</a>
+    </div>
+    <script src = "encoder.js"></script>
+    <script src = "Image Data.js"></script>
+</body>
+</html>
