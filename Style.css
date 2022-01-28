@@ -14,6 +14,8 @@ label, a:link, a:visited{
     border: 3px #ff45be solid;
     text-decoration: none;
     cursor: pointer;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 label:hover , a:hover{

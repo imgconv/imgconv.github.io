@@ -1,4 +1,4 @@
-const LOOKBACK = 0xffff; //maximum lookback length, trade compression for speed
+const LOOKBACK = 0xfff; //maximum lookback length, trade compression for speed
 const TARGET_FRAMERATE = 15; //target frames per second, the higher the smoother slows the encoding process
 
 function encodeLevelData(imageData,iwidth,iheight,afterEncode){
