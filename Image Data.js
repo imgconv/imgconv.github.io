@@ -1,13 +1,17 @@
+let ID = 0; //used to keep track of ongoing encoding calculations
+const dwl = document.getElementById('dwl100');
+const ob = document.getElementById("opt100"); //output box
+const ld = document.getElementById("ld100"); //loading gif
+const input = document.getElementById("inp100");
+const imagedisplay = document.getElementById("img100");
+
 function changeimg(){
-    let input = document.getElementById("inp100");
     let fileReader = new FileReader();
-    let imagedisplay = document.getElementById("img100");
-    let ob = document.getElementById("opt100"); //output box
-    let ld = document.getElementById("ld100"); //loading gif
     ld.hidden = false; //show the 3 dot loading gif
+    ID++;
     
-    fileReader.onload = (e) => {
-      imagedisplay.onload = ()=>{
+    fileReader.onload = function(e){
+      imagedisplay.onload = function(){
          let w = imagedisplay.naturalWidth;
          let h = imagedisplay.naturalHeight;
          
@@ -20,9 +24,9 @@ function changeimg(){
          cvs.height = h;
          let cnt = cvs.getContext('2d');
          cnt.drawImage(imagedisplay,0,0);
-         imgdata = cnt.getImageData(0,0,w,h).data;
+         let imgdata = cnt.getImageData(0,0,w,h).data;
          
-         function afterEncode(lvldata){
+         function afterEncode(lvldata){             
              //clear existing level data in the page if there's any
              ob.innerHTML = '';
          
@@ -45,14 +49,13 @@ function changeimg(){
              fls += String(lvldata[lvldata.length - 1]);
          
              //show the download button
-             let dwl = document.getElementById('dwl100');
              dwl.href = fls;
              dwl.hidden = false; //show download button
              ld.hidden = true; //hide to loading gif 
              console.log('done');
          }
          
-         let lvldata = encodeLevelData(imgdata,w,h,afterEncode);
+         setTimeout(encodeLevelData(imgdata,w,h,afterEncode,ID));
       };
       imagedisplay.src = e.target.result;
     };

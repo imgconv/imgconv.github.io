@@ -1,7 +1,7 @@
-const LOOKBACK = 0xfff; //maximum lookback length, trade compression for speed
+const LOOKBACK = 65535; //maximum lookback length, trade compression for speed
 const TARGET_FRAMERATE = 15; //target frames per second, the higher the smoother slows the encoding process
 
-function encodeLevelData(imageData,iwidth,iheight,afterEncode){
+function encodeLevelData(imageData,iwidth,iheight,afterEncode,initialID){
     console.log(iwidth,iheight);
     let width = [iwidth];
     let height = [iheight];
@@ -24,6 +24,7 @@ function encodeLevelData(imageData,iwidth,iheight,afterEncode){
     let mipi = 1; //Mip Index
     
     step1 = function(){
+        if(ID != initialID) return; //ID check to see if another image was loaded in the meantime
         if (width[mipi - 1] == 1 && height[mipi - 1] == 1) {
             setTimeout(step2);
             return;
@@ -93,6 +94,7 @@ function encodeLevelData(imageData,iwidth,iheight,afterEncode){
     
     //----------------Generate the uncompressed output------------------------
     step2 = function(){
+        if(ID != initialID) return; //ID check
         lastmip = mipi - 1;
         compressedleveldata.push(lastmip); //number of miplevels
         let mipline = (lastmip + 1) * 3 + 1;
@@ -107,7 +109,7 @@ function encodeLevelData(imageData,iwidth,iheight,afterEncode){
         { 
             let pos = 0;
             for(let j = 0;j <= lastmip;j++){
-                for (i = 0; i < width[j] * height[j]; i++){
+                for (let i = 0; i < width[j] * height[j]; i++){
                     let r = Math.floor(Math.pow(mip[j][i*3 + 0],0.4545)*255);
                     let g = Math.floor(Math.pow(mip[j][i*3 + 1],0.4545)*255);
                     let b = Math.floor(Math.pow(mip[j][i*3 + 2],0.4545)*255);
@@ -122,6 +124,7 @@ function encodeLevelData(imageData,iwidth,iheight,afterEncode){
     
     //--------------------------compress the rest of level data---------------------
     step3 = function(){
+        if(ID != initialID) return; //ID check
         compressedleveldata.push(0);
         compressedleveldata.push(0);
         compressedleveldata.push(uncompressedleveldata[0]);
@@ -130,6 +133,7 @@ function encodeLevelData(imageData,iwidth,iheight,afterEncode){
         console.log("uncompressed: "+length);
         let time = Date.now();
         let loop = function(){
+            if(ID != initialID) return;
             if (!(rd < length)){
                 setTimeout(step4)
                 return;
@@ -162,6 +166,7 @@ function encodeLevelData(imageData,iwidth,iheight,afterEncode){
     }
     
     step4 = function(){
+        if(ID != initialID) return; //ID check. Note that just putting the check here is enough. but I also included other checks before this just to end the processing earlier rather than going through the whole thing and discarding the result in the end.
         console.log("compressed: "+compressedleveldata.length);
         afterEncode(compressedleveldata); //trigger the callback with level data as param
     }
