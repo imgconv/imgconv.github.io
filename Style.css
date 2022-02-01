@@ -16,6 +16,7 @@ label, a:link, a:visited{
     cursor: pointer;
     padding-left: 4px;
     padding-right: 4px;
+    display: inline-block;
 }
 
 label:hover , a:hover{
