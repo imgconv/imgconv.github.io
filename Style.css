@@ -29,3 +29,7 @@ label:active , a:active{
     background-color: #cf0086;
     text-decoration: none;
 }
+
+[hidden]{ /*used so that hide attribute of the download button works*/
+    display:none !important;
+}
