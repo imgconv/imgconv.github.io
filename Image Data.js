@@ -1,3 +1,4 @@
+//percent and encodeLevelData are "imported" from encoder.js
 let ID = 0; //used to keep track of ongoing encoding calculations
 const dwl = document.getElementById('dwl100');
 const ob = document.getElementById("opt100"); //output box
@@ -8,6 +9,13 @@ const imagedisplay = document.getElementById("img100");
 function changeimg(){
     let fileReader = new FileReader();
     ld.hidden = false; //show the 3 dot loading gif
+    percent.textContent = '0.00%'; //just here to ensure graphical consistency
+    dwl.hidden = true; //hide download button if visible
+    
+    while(ob.firstChild){ //empty the output box if it has anything
+        ob.removeChild(ob.lastChild);
+    }
+    
     ID++;
     
     fileReader.onload = function(e){

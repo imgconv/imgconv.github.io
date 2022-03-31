@@ -1,5 +1,6 @@
 const LOOKBACK = 65535; //maximum lookback length, trade compression for speed
-const TARGET_FRAMERATE = 15; //target frames per second, the higher the smoother slows the encoding process
+const TARGET_FRAMERATE = 15; //target frames per second, the higher the smoother but slows down the encoding process
+const percent = document.getElementById("perc100");
 
 function encodeLevelData(imageData,iwidth,iheight,afterEncode,initialID){
     console.log(iwidth,iheight);
@@ -138,6 +139,7 @@ function encodeLevelData(imageData,iwidth,iheight,afterEncode,initialID){
                 setTimeout(step4)
                 return;
             }
+            percent.textContent = (rd/length * 100).toFixed(2) + '%'; //display percentage
             let dist = 0;
             let rep = 0;
             for (let i = 1; (rd - i >= 0 && i < LOOKBACK);i++){
@@ -167,6 +169,7 @@ function encodeLevelData(imageData,iwidth,iheight,afterEncode,initialID){
     
     step4 = function(){
         if(ID != initialID) return; //ID check. Note that just putting the check here is enough. but I also included other checks before this just to end the processing earlier rather than going through the whole thing and discarding the result in the end.
+        percent.innerHTML = '';
         console.log("compressed: "+compressedleveldata.length);
         afterEncode(compressedleveldata); //trigger the callback with level data as param
     }

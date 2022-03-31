@@ -30,6 +30,20 @@ label:active , a:active{
     text-decoration: none;
 }
 
+#perc100{
+    width: 85px;
+    text-align: right;
+    display: inline-block;
+    font-family: Arial, San-Serif;
+    font-size: 20px;
+}
+
+#opt100{
+    text-align: left;
+    font-family: Arial, San-Serif;
+    font-size: 20px;
+}
+
 [hidden]{ /*used so that hide attribute of the download button works*/
     display:none !important;
 }
