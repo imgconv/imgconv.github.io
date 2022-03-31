@@ -42,6 +42,12 @@ label:active , a:active{
     text-align: left;
     font-family: Arial, San-Serif;
     font-size: 20px;
+    width:800px; 
+    height:300px; 
+    border:3px solid; 
+    border-radius:8px; 
+    overflow:visible scroll;
+    white-space: pre;
 }
 
 [hidden]{ /*used so that hide attribute of the download button works*/

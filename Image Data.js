@@ -40,12 +40,35 @@ function changeimg(){
          
              //display image data
              let df = document.createDocumentFragment(); //document fragment
-             for(let i = 0; i < Math.min(lvldata.length,256); i++){ //only display the first 256 lines of the list so the browser doesn't choke
-                 let num = document.createTextNode(lvldata[i]);
-                 let br = document.createElement('br');
-                 df.appendChild(num);
-                 df.appendChild(br);
-             }
+             let i = 0;
+             if(lvldata.length <= 256){
+                 for(let i = 0; i < lvldata.length; i++){
+                     let num = document.createTextNode(lvldata[i]);
+                     let br = document.createElement('br');
+                     df.appendChild(num);
+                     df.appendChild(br);
+                 }
+             }else{
+                 let L = 126;
+                 for(let i = 0; i < Math.floor(L); i++){
+                     let num = document.createTextNode(lvldata[i]);
+                     let br = document.createElement('br');
+                     df.appendChild(num);
+                     df.appendChild(br);
+                 }
+                 for(let i = 0; i < 4; i++){
+                     let num = document.createTextNode('        :');
+                     let br = document.createElement('br');
+                     df.appendChild(num);
+                     df.appendChild(br);
+                 }
+                 for(let i = lvldata.length - Math.ceil(L); i < lvldata.length; i++){
+                     let num = document.createTextNode(lvldata[i]);
+                     let br = document.createElement('br');
+                     df.appendChild(num);
+                     df.appendChild(br);
+                 }
+             }                 
              ob.appendChild(df); //append everything at once
          
              //create a downloadable textfile
