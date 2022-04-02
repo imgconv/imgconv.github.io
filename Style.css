@@ -50,6 +50,19 @@ label:active , a:active{
     white-space: pre;
 }
 
+#ld100{
+    animation: rotation 0.7s linear infinite;
+    transform-origin: 50% 54%;
+    position: relative;
+    top: -1.5px;
+    display:inline-block;
+    vertical-align:bottom;
+}
+
+@keyframes rotation{
+    to{transform: rotate(-360deg);}
+}
+
 [hidden]{ /*used so that hide attribute of the download button works*/
     display:none !important;
 }
