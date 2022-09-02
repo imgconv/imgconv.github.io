@@ -39,38 +39,39 @@ function changeimg(){
              ob.innerHTML = '';
          
              //display image data
-             let df = document.createDocumentFragment(); //document fragment
+             //let df = document.createDocumentFragment(); //document fragment
              let i = 0;
              if(lvldata.length <= 256){
                  for(let i = 0; i < lvldata.length; i++){
                      let num = document.createTextNode(lvldata[i]);
                      let br = document.createElement('br');
-                     df.appendChild(num);
-                     df.appendChild(br);
+                     ob.appendChild(num);
+                     ob.appendChild(br);
                  }
              }else{
                  let L = 126;
                  for(let i = 0; i < Math.floor(L); i++){
                      let num = document.createTextNode(lvldata[i]);
                      let br = document.createElement('br');
-                     df.appendChild(num);
-                     df.appendChild(br);
+                     ob.appendChild(num);
+                     ob.appendChild(br);
+                     
                  }
                  for(let i = 0; i < 4; i++){
                      let num = document.createTextNode('        :');
                      let br = document.createElement('br');
-                     df.appendChild(num);
-                     df.appendChild(br);
+                     ob.appendChild(num);
+                     ob.appendChild(br);
                  }
                  for(let i = lvldata.length - Math.ceil(L); i < lvldata.length; i++){
                      let num = document.createTextNode(lvldata[i]);
                      let br = document.createElement('br');
-                     df.appendChild(num);
-                     df.appendChild(br);
+                     ob.appendChild(num);
+                     ob.appendChild(br);
                  }
              }                 
-             ob.appendChild(df); //append everything at once
-         
+             //ob.appendChild(df); //append everything at once
+             
              //create a downloadable textfile
              let fls = "data:text/plain;charset=\'utf-8\',";
              for(let i = 0; i < lvldata.length - 1; i++){
